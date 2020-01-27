@@ -14,6 +14,15 @@ const getCats = (request, response, acceptedTypes) => {
         age: 3,
     };
     
+    if(acceptedTypes[0] === 'text/xml'){
+        let responseXML = '<response>';
+        responseXML = `${responseXML} <name>${cat.name}</name>`;
+        responseXML = `${responseXML} <age>${cat.age}</age>`;
+        responseXML = `${responseXML} </response>`;
+        
+        return respond(request, response, responseXML, 'text/xml');
+    }
+    
     const catString = JSON.stringify(cat);
     
     return respond(request, response, catString, 'application/json');
