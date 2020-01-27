@@ -8,6 +8,17 @@ const respond = (request, response, content, type) => {
   response.end();
 };
 
+const getCats = (request, response, acceptedTypes) => {
+    const cat = {
+        name: 'mr. cat',
+        age: 3,
+    };
+    
+    const catString = JSON.stringify(cat);
+    
+    return respond(request, response, catString, 'application/json');
+};
+
 const getIndex = (request, response) => {
   respond(request, response, index, 'text/html');
 };

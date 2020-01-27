@@ -32,13 +32,27 @@
     };
     
     const sendAjax = (url, acceptedType) => {
-
+        const xhr = new XMLHttpRequest();
+        xhr.open('GET', url);;
+        
+        xhr.setRequestHeader("Accept", acceptedType);
+        
+        xhr.onload = () => handleResponse(xhr);
+        
+        xhr.send();
     };
 
     const init = () => {
-      const jsonButton = document.querySelector("#getCatsJSON");
-      const xmlButton = document.querySelector("#getCatsXML");
+        const jsonButton = document.querySelector("#getCatsJSON");
+        const xmlButton = document.querySelector("#getCatsXML");
 
+        const sendJSON = () => sendAJAX('/cats', 'application/json');
+        const sendXML = () => sendAJAX('/cats', 'text/xml');
+        
+        jsonButton.addEventListener('click', sendJSON);
+        xmlButton.addEventListener('click', sendXML);
+        
+        // can also do these inlline aswell
     };
 
     window.onload = init;
